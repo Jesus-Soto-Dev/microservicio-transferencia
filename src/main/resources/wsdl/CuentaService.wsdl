@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions
+    name="CuentaService"
+    targetNamespace="http://cajarural.com/ws/cuenta"
+    xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+    xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+    xmlns:tns="http://cajarural.com/ws/cuenta"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+    <!-- Define los tipos de datos del servicio -->
+    <wsdl:types>
+        <xsd:schema targetNamespace="http://cajarural.com/ws/cuenta">
+
+            <!-- Petición: qué mandamos al banco -->
+            <xsd:element name="ConsultarCuentaRequest">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="iban" type="xsd:string"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+
+            <!-- Respuesta: qué nos devuelve el banco -->
+            <xsd:element name="ConsultarCuentaResponse">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="iban"             type="xsd:string"/>
+                        <xsd:element name="titular"          type="xsd:string"/>
+                        <xsd:element name="saldoDisponible"  type="xsd:decimal"/>
+                        <xsd:element name="saldoRetenido"    type="xsd:decimal"/>
+                        <xsd:element name="moneda"           type="xsd:string"/>
+                        <xsd:element name="estadoCuenta"     type="xsd:string"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+
+        </xsd:schema>
+    </wsdl:types>
+
+    <!-- Mensajes que se intercambian -->
+    <wsdl:message name="ConsultarCuentaRequestMsg">
+        <wsdl:part name="parameters" element="tns:ConsultarCuentaRequest"/>
+    </wsdl:message>
+    <wsdl:message name="ConsultarCuentaResponseMsg">
+        <wsdl:part name="parameters" element="tns:ConsultarCuentaResponse"/>
+    </wsdl:message>
+
+    <!-- Operaciones disponibles del servicio -->
+    <wsdl:portType name="CuentaServicePortType">
+        <wsdl:operation name="consultarCuenta">
+            <wsdl:input  message="tns:ConsultarCuentaRequestMsg"/>
+            <wsdl:output message="tns:ConsultarCuentaResponseMsg"/>
+        </wsdl:operation>
+    </wsdl:portType>
+
+    <!-- Cómo se llama (SOAP sobre HTTP) -->
+    <wsdl:binding name="CuentaServiceBinding" type="tns:CuentaServicePortType">
+        <soap:binding style="document"
+                      transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="consultarCuenta">
+            <soap:operation soapAction="consultarCuenta"/>
+            <wsdl:input><soap:body use="literal"/></wsdl:input>
+            <wsdl:output><soap:body use="literal"/></wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+
+    <!-- URL del servicio -->
+    <wsdl:service name="CuentaService">
+        <wsdl:port name="CuentaServicePort" binding="tns:CuentaServiceBinding">
+            <soap:address location="http://sistema-legado.cajarural.com/ws/CuentaService"/>
+        </wsdl:port>
+    </wsdl:service>
+
+</wsdl:definitions>
