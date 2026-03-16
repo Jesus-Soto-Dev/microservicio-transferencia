@@ -1,6 +1,6 @@
 Transferencias Service — Proyecto de Aprendizaje
 Descripción
-Microservicio de ejemplo desarrollado con fines formativos durante el período de prácticas. No contiene datos, credenciales ni información perteneciente a la empresa.
+Microservicio de ejemplo desarrollado con fines formativos. No contiene datos, credenciales ni información perteneciente a empresa alguna.
 El escenario simula una caja rural que necesita procesar transferencias entre cuentas, consultando un sistema bancario legado mediante SOAP/WSDL y persistiendo el resultado en base de datos.
 
 Stack tecnológico
