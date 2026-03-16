@@ -30,7 +30,7 @@ public class Transferencia { //Contiene toda la lógica de negocio
 	
 	// Completar solo si esta pendiente
 	public void completar() {
-		if (this.estado != EstadoTransferencia.PENDIENTE) throw new IllegalArgumentException (
+		if (this.estado != EstadoTransferencia.PENDIENTE) throw new IllegalStateException (
 				"Solo se pueden completar transferencias pendientes");
 		this.estado = EstadoTransferencia.COMPLETADA;
 	}
