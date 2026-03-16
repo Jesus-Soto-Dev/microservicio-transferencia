@@ -24,8 +24,8 @@ Este proyecto es únicamente un ejercicio de aprendizaje personal.
 
 ## Cómo ejecutar
 
-\`\`\`bash
+```bash
 mvn generate-sources
 mvn spring-boot:run
 mvn test
-\`\`\`
+```
